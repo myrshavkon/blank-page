@@ -1,0 +1,348 @@
+:root{
+  --radius:.625rem;
+  --background:oklch(100% 0 0);
+  --foreground:oklch(14.1% .005 285.823);
+  --card:oklch(100% 0 0);
+  --card-foreground:oklch(14.1% .005 285.823);
+  --popover:oklch(100% 0 0);
+  --popover-foreground:oklch(14.1% .005 285.823);
+  --primary:oklch(21% .006 285.885);
+  --primary-foreground:oklch(98.5% 0 0);
+  --secondary:oklch(96.7% .001 286.375);
+  --secondary-foreground:oklch(21% .006 285.885);
+  --muted:oklch(96.7% .001 286.375);
+  --muted-foreground:oklch(55.2% .016 285.938);
+  --accent:oklch(96.7% .001 286.375);
+  --accent-foreground:oklch(21% .006 285.885);
+  --border:oklch(92% .004 286.32);
+  --input:oklch(92% .004 286.32);
+  --ring:oklch(70.5% .015 286.067);
+  --sidebar:oklch(98.5% 0 0);
+  --sidebar-foreground:oklch(14.1% .005 285.823);
+  --sidebar-border:oklch(92% .004 286.32);
+  --destructive:oklch(70.4% .191 22.216);
+  --color-white:#fff; --color-black:#000;
+  --font-editor:"IBM Plex Sans", system-ui, sans-serif;
+  --font-editor-size:18px;
+  --font-editor-scale:1;
+  --font-editor-lh:1.65;
+  --font-editor-ls:.005em;
+  --font-editor-ws:0;
+  --font-ui:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --content-half-width:34ch;
+  --sidebar-w:280px;
+  --sidebar-shadow:0 8px 30px rgba(0,0,0,.12);
+  --drawer-ease:cubic-bezier(.4,0,.2,1);
+}
+.dark{
+  --background:oklch(14.1% .005 285.823);
+  --foreground:oklch(98.5% 0 0);
+  --card:oklch(21% .006 285.885);
+  --card-foreground:oklch(98.5% 0 0);
+  --popover:oklch(21% .006 285.885);
+  --popover-foreground:oklch(98.5% 0 0);
+  --primary:oklch(92% .004 286.32);
+  --primary-foreground:oklch(21% .006 285.885);
+  --secondary:oklch(27.4% .006 286.033);
+  --secondary-foreground:oklch(98.5% 0 0);
+  --muted:oklch(27.4% .006 286.033);
+  --muted-foreground:oklch(70.5% .015 286.067);
+  --accent:oklch(27.4% .006 286.033);
+  --accent-foreground:oklch(98.5% 0 0);
+  --border:oklch(100% 0 0 / .1);
+  --input:oklch(100% 0 0 / .15);
+  --ring:oklch(55.2% .016 285.938);
+  --sidebar:oklch(21% .006 285.885);
+  --sidebar-foreground:oklch(98.5% 0 0);
+  --sidebar-border:oklch(100% 0 0 / .1);
+  --destructive:oklch(70.4% .191 22.216);
+  --sidebar-shadow:0 8px 30px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--background);
+  color:var(--foreground);
+  font-family:var(--font-ui);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* App layout — single column. Sidebar is an overlay drawer, never in flow. */
+.app{
+  position:relative;
+  display:block;
+  height:100dvh;
+  width:100%;
+}
+
+/* ---------- Sidebar drawer (hidden by default) ---------- */
+.sidebar{
+  position:fixed;
+  top:0; left:0; bottom:0;
+  width:var(--sidebar-w);
+  max-width:84vw;
+  background:var(--sidebar);
+  color:var(--sidebar-foreground);
+  border-right:1px solid var(--sidebar-border);
+  box-shadow:var(--sidebar-shadow);
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+  z-index:40;
+  transform:translateX(-100%);
+  visibility:hidden;
+  transition:transform .26s var(--drawer-ease), visibility 0s linear .26s;
+  will-change:transform;
+}
+.sidebar.open{
+  transform:translateX(0);
+  visibility:visible;
+  transition:transform .26s var(--drawer-ease), visibility 0s linear 0s;
+}
+
+.sidebar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  padding:.875rem 1rem .75rem;
+}
+.brand{
+  display:flex;align-items:center;gap:.5rem;
+  font-weight:600;font-size:.95rem;letter-spacing:-.01em;
+}
+.brand-logo{width:18px;height:18px;flex:0 0 auto}
+
+.icon-btn{
+  appearance:none;border:1px solid transparent;background:transparent;
+  color:var(--muted-foreground);cursor:pointer;
+  width:28px;height:28px;border-radius:var(--radius);
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .15s, color .15s;
+}
+.icon-btn:hover{background:var(--accent);color:var(--accent-foreground)}
+.icon-btn:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+.icon-btn svg{width:16px;height:16px}
+
+.new-note-btn{
+  margin:0 .75rem .5rem;
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  padding:.55rem .75rem;
+  border-radius:var(--radius);
+  border:1px solid var(--sidebar-border);
+  background:var(--background);
+  color:var(--foreground);
+  font-family:var(--font-ui);font-size:.8125rem;font-weight:500;
+  cursor:pointer;
+  transition:background .15s, border-color .15s;
+}
+.new-note-btn:hover{background:var(--accent)}
+.new-note-btn svg{width:15px;height:15px}
+
+.note-list{
+  flex:1;min-height:0;overflow-y:auto;
+  padding:.25rem .5rem 1rem;
+  scrollbar-width:thin;
+}
+.note-list::-webkit-scrollbar{width:8px}
+.note-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px}
+.note-item{
+  display:flex;align-items:flex-start;gap:.5rem;
+  padding:.5rem .55rem;
+  border-radius:var(--radius);
+  cursor:pointer;
+  color:var(--sidebar-foreground);
+  transition:background .12s;
+  user-select:none;
+}
+.note-item:hover{background:var(--accent)}
+.note-item.active{background:var(--accent)}
+.note-item.active .note-title{font-weight:600}
+.note-item-main{flex:1;min-width:0}
+.note-title{
+  font-size:.8125rem;line-height:1.3;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:var(--sidebar-foreground);
+}
+.note-meta{
+  font-size:.6875rem;color:var(--muted-foreground);
+  margin-top:.15rem;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.note-delete{
+  flex:0 0 auto;opacity:0;
+  appearance:none;border:none;background:transparent;color:var(--muted-foreground);
+  cursor:pointer;width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:opacity .15s, background .15s, color .15s;
+}
+.note-item:hover .note-delete{opacity:1}
+.note-delete:hover{background:var(--destructive);color:#fff}
+.note-delete svg{width:14px;height:14px}
+
+/* Rename button + inline rename input */
+.note-rename{
+  flex:0 0 auto;opacity:0;
+  appearance:none;border:none;background:transparent;color:var(--muted-foreground);
+  cursor:pointer;width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:opacity .15s, background .15s, color .15s;
+}
+.note-item:hover .note-rename{opacity:1}
+.note-rename:hover{background:var(--accent-foreground);color:var(--accent)}
+.note-rename svg{width:14px;height:14px}
+.note-item.renaming{cursor:default}
+.note-item.renaming .note-rename,
+.note-item.renaming .note-delete{display:none}
+.rename-input{
+  width:100%;
+  font-family:var(--font-ui);
+  font-size:.8125rem;
+  font-weight:400;
+  line-height:1.3;
+  color:var(--sidebar-foreground);
+  background:var(--background);
+  border:1px solid var(--ring);
+  border-radius:6px;
+  padding:.2rem .35rem;
+  margin:0;
+  outline:none;
+  caret-color:var(--foreground);
+}
+.rename-input::placeholder{color:var(--muted-foreground);opacity:.7}
+.note-delete svg{width:14px;height:14px}
+
+.sidebar-foot{
+  padding:.5rem .75rem .75rem;
+  border-top:1px solid var(--sidebar-border);
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+}
+.local-badge{
+  display:flex;align-items:center;gap:.35rem;
+  font-size:.6875rem;color:var(--muted-foreground);
+  line-height:1.3;
+}
+.local-badge svg{width:13px;height:13px;flex:0 0 auto}
+
+/* ---------- Scrim ---------- */
+.scrim{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.35);
+  z-index:35;
+  opacity:0;
+  transition:opacity .26s var(--drawer-ease);
+}
+.scrim.show{opacity:1}
+.scrim[hidden]{display:none}
+
+/* ---------- Main editor ---------- */
+.main{
+  position:relative;
+  display:flex;flex-direction:column;
+  min-width:0;min-height:0;
+  height:100%;
+  background:var(--background);
+}
+.topbar{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;gap:.25rem;
+  padding:.5rem .75rem;
+  z-index:5;
+  pointer-events:none;
+}
+.topbar > *{pointer-events:auto}
+.topbar-spacer{flex:1}
+
+.editor-scroll{
+  flex:1;min-height:0;overflow-y:auto;
+  padding:5.5rem 1.25rem 6rem;
+}
+.editor-wrap{
+  max-width:calc(var(--content-half-width) * 2);
+  margin:0 auto;
+  width:100%;
+}
+#editor{
+  width:100%;
+  min-height:60vh;
+  border:none;outline:none;resize:none;
+  background:transparent;
+  color:var(--foreground);
+  font-family:var(--font-editor);
+  font-size:calc(var(--font-editor-size) * var(--font-editor-scale));
+  line-height:var(--font-editor-lh);
+  letter-spacing:var(--font-editor-ls);
+  word-spacing:var(--font-editor-ws);
+  caret-color:var(--foreground);
+  padding:0;
+  display:block;
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
+#editor::placeholder{color:var(--muted-foreground);opacity:.8}
+#editor:focus{outline:none}
+
+.editor-status{
+  max-width:calc(var(--content-half-width) * 2);
+  margin:1.25rem auto 0;
+  width:100%;
+  font-size:.6875rem;color:var(--muted-foreground);
+  display:flex;justify-content:space-between;gap:1rem;
+  opacity:.85;
+}
+
+/* ---------- Settings menu ---------- */
+.menu{
+  position:absolute;top:2.5rem;right:0;
+  min-width:240px;
+  background:var(--popover);color:var(--popover-foreground);
+  border:1px solid var(--border);
+  border-radius:calc(var(--radius) + 2px);
+  box-shadow:0 8px 28px rgba(0,0,0,.12);
+  padding:.4rem;
+  z-index:50;
+  display:none;
+}
+.menu.open{display:block}
+.menu-section{padding:.35rem .5rem .25rem}
+.menu-label{
+  font-size:.6875rem;color:var(--muted-foreground);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem;
+}
+.seg{display:flex;gap:.25rem;background:var(--muted);padding:.2rem;border-radius:var(--radius)}
+.seg button{
+  flex:1;appearance:none;border:none;background:transparent;
+  color:var(--muted-foreground);font-family:var(--font-ui);font-size:.75rem;
+  padding:.3rem .4rem;border-radius:calc(var(--radius) - 2px);cursor:pointer;
+  transition:background .12s,color .12s;
+}
+.seg button.on{background:var(--background);color:var(--foreground)}
+.menu-item{
+  display:flex;align-items:center;gap:.5rem;width:100%;
+  padding:.5rem .5rem;border-radius:var(--radius);
+  background:transparent;border:none;cursor:pointer;
+  color:var(--foreground);font-family:var(--font-ui);font-size:.8125rem;text-align:left;
+}
+.menu-item:hover{background:var(--accent)}
+.menu-item svg{width:15px;height:15px;color:var(--muted-foreground)}
+.menu-divider{height:1px;background:var(--border);margin:.3rem .25rem}
+.menu-hint{font-size:.6875rem;color:var(--muted-foreground);padding:.25rem .5rem .35rem;line-height:1.4}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px){
+  .editor-scroll{padding:4.5rem 1rem 4rem}
+}
+
+@media print{
+  .sidebar, .scrim, .topbar, .editor-status{display:none !important}
+  .editor-scroll{padding:0;overflow:visible}
+  #editor{min-height:auto;overflow:visible}
+}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+@media (prefers-reduced-motion: reduce){
+  .sidebar, .scrim{transition:none}
+}

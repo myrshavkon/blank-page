@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="A truly simple writing app in your browser. No setup, no clutter, just a focused space to write. Everything stays on your device." />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Blank Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cousine:wght@400;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" />
+<link id="page-favicon" rel="icon" href="data:image/svg+xml,%3csvg%20width=&#x27;16&#x27;%20height=&#x27;16&#x27;%20viewBox=&#x27;0%200%2016%2016&#x27;%20fill=&#x27;none&#x27;%20xmlns=&#x27;http://www.w3.org/2000/svg&#x27;%3e%3cg%20clip-path=&#x27;url(%23clip0_178_488)&#x27;%3e%3cpath%20d=&#x27;M4.50391%200.900391L12.5537%200.958008L12.751%200.969727C13.7276%201.07414%2014.515%201.88867%2014.5244%202.89648L14.6201%2012.0547C14.6256%2012.582%2014.4168%2013.0759%2014.042%2013.4414L14.043%2013.4424C13.6798%2013.7974%2013.1987%2013.9929%2012.6914%2013.998C12.6218%2014.2376%2012.4926%2014.4566%2012.3135%2014.6367C12.0251%2014.9267%2011.6376%2015.084%2011.2324%2015.084H11.2207L3.02637%2015.0254H3.02539C2.19993%2015.0189%201.50689%2014.3557%201.49805%2013.5195L1.40039%204.2041C1.3964%203.80142%201.55224%203.41827%201.83691%203.13281C2.03404%202.93517%202.27743%202.80079%202.54102%202.73438C2.56372%202.25029%202.76513%201.79842%203.11426%201.45703V1.45605C3.50319%201.07657%204.00506%200.923809%204.46973%200.900391L4.48633%200.899414L4.50391%200.900391ZM5.17285%2011.4004L12.0674%2011.4697L11.9844%203.49707L5.10645%203.42871L5.17285%2011.4004Z&#x27;%20fill=&#x27;%231D1D1B&#x27;%20stroke=&#x27;white&#x27;%20stroke-width=&#x27;1.2&#x27;/%3e%3crect%20x=&#x27;5&#x27;%20y=&#x27;3.5&#x27;%20width=&#x27;7&#x27;%20height=&#x27;8&#x27;%20fill=&#x27;white&#x27;/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id=%23clip0_178_488%3e%3crect%20width=%2716%27%20height=%2716%27%20fill=%27white%27/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e" type="image/svg+xml" />
+<script src="prepaint.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- Sidebar (hidden drawer; slides in on click) -->
+  <aside class="sidebar" id="sidebar" aria-label="Notes" aria-hidden="true">
+    <div class="sidebar-head">
+      <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g clip-path="url(#bp-clip)">
+            <path d="M4.504.9 12.554.958l.197.012c.977.104 1.764.918 1.773 1.926l.096 9.158c.005.527-.204 1.021-.578 1.387l.001.001c-.363.355-.844.55-1.352.556-.07.24-.198.459-.377.639-.289.29-.676.447-1.082.447h-.012L3.026 15.025h-.001c-.825-.006-1.518-.67-1.527-1.506L1.4 4.204c-.004-.403.152-.786.437-1.071.197-.198.44-.332.704-.399.023-.484.224-.936.573-1.277v-.001C3.503 1.077 4.005.924 4.47.9Zm.67 10.5 6.893.07-.083-7.973L5.106 3.43l.067 7.971Z" fill="currentColor" stroke="white" stroke-width="1.2"/>
+            <rect x="5" y="3.5" width="7" height="8" fill="white"/>
+          </g>
+          <defs><clipPath id="bp-clip"><rect width="16" height="16" fill="white"/></clipPath></defs>
+        </svg>
+        <span>Blank Page</span>
+      </div>
+      <button class="icon-btn" id="sidebarClose" type="button" aria-label="Close notes">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <button class="new-note-btn" id="newNoteBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      New note
+    </button>
+
+    <div class="note-list" id="noteList" role="list"></div>
+
+    <div class="sidebar-foot">
+      <span class="local-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="M12 8v8M8.5 12h7"/></svg>
+        Saved on this device only
+      </span>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <!-- Main editor -->
+  <main class="main">
+    <div class="topbar">
+      <button class="icon-btn" id="sidebarToggle" type="button" aria-label="Open notes" aria-controls="sidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar-spacer"></div>
+      <button class="icon-btn" id="settingsBtn" type="button" aria-label="Settings" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+      </button>
+      <div class="menu" id="settingsMenu" role="menu" aria-label="Settings">
+        <div class="menu-section">
+          <div class="menu-label">Theme</div>
+          <div class="seg" id="themeSeg">
+            <button data-theme="light" type="button">Light</button>
+            <button data-theme="dark" type="button">Dark</button>
+            <button data-theme="system" type="button">System</button>
+          </div>
+        </div>
+        <div class="menu-section">
+          <div class="menu-label">Typeface</div>
+          <div class="seg" id="typefaceSeg">
+            <button data-typeface="sans" type="button">Sans</button>
+            <button data-typeface="serif" type="button">Serif</button>
+            <button data-typeface="mono" type="button">Mono</button>
+          </div>
+        </div>
+        <div class="menu-section">
+          <div class="menu-label">Text size</div>
+          <div class="seg" id="scaleSeg">
+            <button data-scale="0.9167" type="button">S</button>
+            <button data-scale="1" type="button">M</button>
+            <button data-scale="1.0833" type="button">L</button>
+          </div>
+        </div>
+        <div class="menu-divider"></div>
+        <button class="menu-item" id="exportBtn" type="button" role="menuitem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download note (.txt)
+        </button>
+        <button class="menu-item" id="printBtn" type="button" role="menuitem">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+          Print / Save as PDF
+        </button>
+        <div class="menu-divider"></div>
+        <div class="menu-hint">Everything you write is stored only in this browser. No account, no sync, no sharing.</div>
+      </div>
+    </div>
+
+    <div class="editor-scroll" id="editorScroll">
+      <div class="editor-wrap">
+        <textarea id="editor" placeholder="Start writing…" spellcheck="true" aria-label="Note content"></textarea>
+        <div class="editor-status">
+          <span id="wordCount">0 words</span>
+          <span id="savedBadge">Saved locally</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
