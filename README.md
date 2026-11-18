@@ -1,0 +1,3 @@
+this is just my version of blank-page. I need it because I don't want to use blamk.page because it needs google account. you can self host it or whatever I don't care. it will have no license because why not. I will deploy it as a github site so you can use it. oh I also need it because of my other repos and I just like to keep notes somewhere but don't like using notepad++ or subl or nano and I don't really care about the other note keeping apps on linux because I know they are many. this btw also i optimized for low ram usage so that's another plus. 
+
+## IF YOU WANT ANYTHING NEW OR WANT TO REPORT A BUG PLEASSE MAKE AN ISSUE IN THIS REPO
